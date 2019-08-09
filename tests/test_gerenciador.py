@@ -60,3 +60,15 @@ def test_corpo_post_deve_conter_titulo_de_3_a_50_caracteres(cliente):
     )
     assert resposta.status_code == 400
     assert "Length must be between 3 and 50." in resposta.json["titulo"]
+
+    def test_corpo_post_deve_conter_descricao_de_3_a_140_caracteres(cliente):
+        resposta = cliente.post(
+            "/tarefas", json={"descricao":"a" * 2}
+        )
+        assert resposta.status_code == 400
+        assert "Length must be between 3 and 140." in resposta.json["descricao"]
+        resposta = cliente.post(
+            "/tarefas", json={"descricao": "a" * 141}
+        )
+        assert resposta.status_code == 400
+        assert "Length must be between 3 and 140." in resposta.json["descricao"]

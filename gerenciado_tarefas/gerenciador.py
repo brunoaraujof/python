@@ -6,7 +6,7 @@ from marshmallow.validate import Length
 
 class EsquemaTarefas(Schema):
     titulo = fields.Str(required=True, validate=Length(min=3, max=50))
-    descricao = fields.Str(required=True)
+    descricao = fields.Str(required=True, validate=Length(min=3, max=140))
 
 
 app = Flask("Gerenciador")
