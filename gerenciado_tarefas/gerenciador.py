@@ -1,10 +1,13 @@
 from flask import Flask, request
 from flask_restplus import Resource, Api, abort
 from marshmallow import Schema, fields
+from marshmallow.validate import Length
+
 
 class EsquemaTarefas(Schema):
-    titulo = fields.Str(required=True)
+    titulo = fields.Str(required=True, validate=Length(min=3, max=50))
     descricao = fields.Str(required=True)
+
 
 app = Flask("Gerenciador")
 
@@ -19,8 +22,6 @@ class RecursoTarefas(Resource):
 
     def post(self):
         data, errors = EsquemaTarefas().load(request.json or {})
-        tarefa = EsquemaTarefas().load(request.json)
-
         if errors:
             abort(400, **errors)
         data["concluida"] = False

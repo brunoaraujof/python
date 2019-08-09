@@ -48,3 +48,15 @@ def test_quando_bem_sucedido_uma_tarefa_deve_ter_id_unico(cliente):
     )
 
     assert resposta_1.json["id"] != resposta_2.json["id"]
+
+def test_corpo_post_deve_conter_titulo_de_3_a_50_caracteres(cliente):
+    resposta = cliente.post(
+        "/tarefas", json={"titulo":"a" * 2}
+    )
+    assert resposta.status_code == 400
+    assert "Length must be between 3 and 50." in resposta.json["titulo"]
+    resposta = cliente.post(
+        "/tarefas", json={"titulo": "a" * 51}
+    )
+    assert resposta.status_code == 400
+    assert "Length must be between 3 and 50." in resposta.json["titulo"]
