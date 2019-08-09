@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "gerenciado-tarefas"
+version = "0.1.0"
+description = ""
+authors = ["Bruno Araújo <bruno.araujo@monetizze.com.br>"]
+
+[tool.poetry.dependencies]
+python = "^2.7"
+flask = "^1.1"
+flask-restplus = "^0.12.1"
+marshmallow = {version = "^2.19", allows-prereleases = true}
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+httpie = "^1.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
