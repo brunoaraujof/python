@@ -1,4 +1,3 @@
-from gerenciado_tarefas import __version__
 from gerenciado_tarefas.gerenciador import app
 import pytest
 
